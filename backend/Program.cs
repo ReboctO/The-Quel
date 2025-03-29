@@ -19,6 +19,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // ✅ Register Services and Repositories
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserRepository>();
+// builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<AuditLogRepository>();
+builder.Services.AddScoped<AdminRepository>();
+
 
 // ✅ Add CORS Policy
 builder.Services.AddCors(options =>

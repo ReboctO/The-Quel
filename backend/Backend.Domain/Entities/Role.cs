@@ -1,7 +1,11 @@
-using Backend.Domain.Entities;
-public class Role
+namespace Backend.Domain.Entities
 {
-    public int Id { get; set; }
-    public string RoleName { get; set; }
-    public ICollection<User> Users { get; set; }
+    public class Role
+    {
+        public int RoleID { get; set; }
+        public string RoleName { get; set; } = string.Empty;
+
+        // Navigation Property (if needed)
+        public ICollection<Admin>? Admins { get; set; }
+    }
 }

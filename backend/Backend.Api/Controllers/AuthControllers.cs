@@ -16,11 +16,12 @@ namespace Backend.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterAdminRequest request)
         {
-            var token = await _authService.RegisterUserAsync(request.Username, request.Email, request.Password, request.Role);
+            var token = await _authService.RegisterAdminAsync(request.Username, request.Email,request.Password, request.RoleID);
+            
             if (token == null)
-                return BadRequest("Email already exists or invalid role");
+                return BadRequest("Username already exists or invalid role.");
 
             return Ok(new { Token = token });
         }
@@ -30,19 +31,21 @@ namespace Backend.Api.Controllers
         {
             var token = await _authService.LoginUserAsync(request.Email, request.Password);
             if (token == null)
-                return Unauthorized("Invalid credentials");
+                return Unauthorized("Invalid credentials Yawaa");
 
             return Ok(new { Token = token });
         }
     }
+    
 
-    public class RegisterRequest
+   public class RegisterAdminRequest 
     {
         public required string Username { get; set; }
         public required string Email { get; set; }
         public required string Password { get; set; }
-        public required string Role { get; set; }
+        public required int RoleID { get; set; } // Use int to match method
     }
+
     
 
     public class LoginRequest
